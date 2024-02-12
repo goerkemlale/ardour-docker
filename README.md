@@ -1,13 +1,15 @@
 # ardour-docker
+**This Ardour Version: 8.2**\
 Docker installation of Ardour build files
 
 This repo is used to create a Docker image for installing the Ardour DAW at https://github.com/Ardour/ardour using
 
-**This Ardour Version: 8.2**
 
-* Docker as a disposable environment
-* Debian Sid as a base
-* apt-fast as a download hastener
+
+* [Docker](https://www.docker.com/) as a compile disposable environment
+* [Debian Sid](https://hub.docker.com/layers/library/debian/sid/images/sha256-f3ddf8d7f880d9a41177fc523121fa0be540614f9937e46f0d72ac3e49294d54?context=explore) as a base
+* [apt-fast](https://github.com/ilikenwf/apt-fast) as a download hastener
+* And many compile suits described in [Ardour: Build Dependencies](https://nightly.ardour.org/list.php#build_deps)
 
 # Installation
 * Simply run in Docker
@@ -44,13 +46,6 @@ echo "@audio   -  memlock    unlimited" \
 sudo groupadd audio
 sudo usermod -a -G audio yourUserID
 ```
-
-# TODO
-
-* Add How To Use 3: Deploying in VM
-* Create install script achieving RTP
-* Auto update whenever Nightly List website updated
-
 # Structure
 ## Dockerfile
 The dockerfile has 4 stages:
@@ -61,3 +56,9 @@ The dockerfile has 4 stages:
 
 ## Docker Compose
 Simply added volume information
+
+# TODO
+
+* Add How To Use 3: Deploying in VM
+* Create install script achieving RTP
+* Auto update script whenever [Nightly List](https://nightly.ardour.org/list.php#build_deps) page updated
