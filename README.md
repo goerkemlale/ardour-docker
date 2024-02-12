@@ -4,26 +4,18 @@ Docker installation of Ardour build files
 
 This repo is used to create a Docker image for installing the Ardour DAW at https://github.com/Ardour/ardour using
 
-
-
 * [Docker](https://www.docker.com/) as a compile disposable environment
 * [Debian Sid](https://hub.docker.com/layers/library/debian/sid/images/sha256-f3ddf8d7f880d9a41177fc523121fa0be540614f9937e46f0d72ac3e49294d54?context=explore) as a base
 * [apt-fast](https://github.com/ilikenwf/apt-fast) as a download hastener
 * And many compile suits described in [Ardour: Build Dependencies](https://nightly.ardour.org/list.php#build_deps)
 
 # Installation
-* Simply run in Docker
-*  **Or** simply run in Docker Compose
+* Simply run in Docker with shared volume
 * **Or** You can clone this repo + build and edit Dockerfile yourself
 
 ## Using Docker
 ```
-docker run goerkemlale/ardour
-```
-
-## Using Docker Compose
-```
-docker compose up
+docker run goerkemlale/ardour -v /opt/docker/ardour /usr/src/app/ardour
 ```
 
 ## Cloning Repo
@@ -33,29 +25,17 @@ $EDITOR ./ardour-docker/Dockerfile
 ```
 
 # Use
-* Run this code to install Ardour in your ***host*** system
+* Run this code anywhere to install Ardour in your ***host*** system
 ```
-/opt/docker/ardour/waf install
+sh /opt/docker/ardour/ardour-install.sh
 ```
-* Run this code to achieve real time priorty
-```
-echo "@audio   -  rtprio     95" \
-echo "@audio   -  memlock    unlimited" \
->> /etc/security/limits.d/audio.conf
 
-sudo groupadd audio
-sudo usermod -a -G audio yourUserID
-```
 # Structure
 ## Dockerfile
 The dockerfile has 4 stages:
 1. **sidaptfast:** Base image for downloading resources fast
 2. **ardour-compiler:** Download all compiler related packages as specified in https://nightly.ardour.org/list.php#build_deps with Debian Sid package management
-3. **ardour-install:** Download Ardour from Git
-4. **ardour-compiled:** Compiled binaries of Ardour
-
-## Docker Compose
-Simply added volume information
+3. **ardour-download:** Download Ardour from Git
 
 # TODO
 
